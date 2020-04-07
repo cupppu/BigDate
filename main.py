@@ -1,4 +1,12 @@
 import datetime
+import argparse
+
+parser = argparse.ArgumentParser(description="Options for different modes")
+parser.add_argument("-m", "--ms", help="show seconds and milliseconds", action="store_true")
+parser.add_argument("-r", "--hr", help="show the time in 12-hour format instead of 24-hour", action="store_true")
+args = parser.parse_args()
+if args.hr:
+    print("12hr works")
 
 
 def numberToStringList(number):
@@ -84,11 +92,24 @@ date_time_now = datetime.datetime.today() # get date and time for "now"
 year = convertYear(date_time_now.year)
 month = convertMonDayHr(date_time_now.month)
 day = convertMonDayHr(date_time_now.day)
-hr = convertMonDayHr(date_time_now.hour)
+if not args.hr:
+    hr = convertMonDayHr(date_time_now.hour)
+elif date_time_now.hour < 12:
+    hr = convertMonDayHr(date_time_now.hour)
+    hr = "上午" + hr
+elif date_time_now.hour > 12:
+    hr = convertMonDayHr(date_time_now.hour - 12)
+    hr = "下午" + hr
+else:
+    hr = convertMonDayHr(date_time_now.hour)
+    hr = "下午" + hr
 mins = convertMinSecMicro(date_time_now.minute)
 sec = convertMinSecMicro(date_time_now.second)
 ms = convertMinSecMicro(date_time_now.microsecond//1000) # this is converted from microsends to milliseconds
 
 
 print(date_time_now)
-print(year+"年"+month+"月"+day+"日"+hr+"時"+mins+"分"+sec+"秒"+ms+"毫秒")
+if args.ms:
+    print(year+"年"+month+"月"+day+"日"+hr+"時"+mins+"分"+sec+"秒"+ms+"毫秒")
+else:
+    print(year+"年"+month+"月"+day+"日"+hr+"時"+mins+"分")
