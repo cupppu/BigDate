@@ -5,8 +5,6 @@ parser = argparse.ArgumentParser(description="Options for different modes")
 parser.add_argument("-m", "--ms", help="show seconds and milliseconds", action="store_true")
 parser.add_argument("-r", "--hr", help="show the time in 12-hour format instead of 24-hour", action="store_true")
 args = parser.parse_args()
-if args.hr:
-    print("12hr works")
 
 
 def numberToStringList(number):
