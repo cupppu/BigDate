@@ -40,17 +40,14 @@ def convertMonDayHr(int_datetime):
         return mondayhr_str_list[0]
     elif int_datetime == 10:
         mondayhr_string = "拾"
-        return mondayhr_string
     elif int_datetime < 20:
         mondayhr_string = "拾" + mondayhr_str_list[1]
-        return mondayhr_string
     elif int_datetime < 100:
         if int_datetime % 10 != 0:
             mondayhr_string = mondayhr_str_list[0] + "拾" + mondayhr_str_list[1]
-            return mondayhr_string
         else:
             mondayhr_string = mondayhr_str_list[0] + "拾"
-            return mondayhr_string
+    return mondayhr_string
 
 
 def convertMinSecMicro(int_datetime):
@@ -61,33 +58,25 @@ def convertMinSecMicro(int_datetime):
 
     if int_datetime < 10:                           # 1 digit
         time_string = "零" + time_str_list[0]
-        return time_string
     elif int_datetime < 100:                        # 2 digit
         if int_datetime == 10:                          #10
             time_string = "拾"
-            return time_string
         elif int_datetime < 20:                          #11-19
             time_string = "拾" + time_str_list[1]
-            return time_string
         elif int_datetime % 10 == 0:                   #ends in 0
             time_string = time_str_list[0] + "拾"
-            return time_string
         else:                                              #all other
             time_string = time_str_list[0] + "拾" + time_str_list[1]
-            return time_string
     elif int_datetime < 1000:                       # 3 digit
         if int_datetime % 100 == 0: #hundreds
             time_string = time_str_list[0] + "佰"
-            return time_string
         elif int_datetime % 100 < 10: # x0x
             time_string = time_str_list[0] + "佰零" + time_str_list[-1]
-            return time_string
         elif int_datetime % 10 == 0: # xx0
             time_string = time_str_list[0] + "佰" + time_str_list[1] + "拾"
-            return time_string
         else:
             time_string = time_str_list[0] + "佰" + time_str_list[1] + "拾" + time_str_list[2]
-            return time_string
+    return time_string
 
 
 date_time_now = datetime.datetime.today() # get date and time for "now"
