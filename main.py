@@ -4,7 +4,6 @@ import datetime
 import math
 
 date_time_now = datetime.datetime.today() # get date and time for "now"
-# 零壹貳?肆伍陸柒捌玖 拾佰
 
 def numberToIntList(number):
     """ Converts an int into a list containing the integer digits """
@@ -48,7 +47,6 @@ def convertMonDayHr(int_datetime):
     datetime_int_list = numberToIntList(int_datetime)
     mondayhr_str_list = IntListToStringList(datetime_int_list)
     
-    # 0-9, 10, 11-19, 20-99
     if int_datetime < 10:
         return mondayhr_str_list[0]
     elif int_datetime == 10:
@@ -72,9 +70,6 @@ def convertMinSecMicro(int_datetime):
     time_int_list = numberToIntList(int_datetime)
     time_str_list = IntListToStringList(time_int_list)
 
-    # 1 digit: 0-9
-    # 2 digit: 10, 11-19, 20-99, %10 = 0
-    # 3 digit: %100 = 0, %10 = 0 and %1 != 0, %10 = 0, rest
     if int_datetime < 10:                           # 1 digit
         time_string = "零" + time_str_list[0]
         return time_string
@@ -95,7 +90,7 @@ def convertMinSecMicro(int_datetime):
         if int_datetime % 100 == 0: #hundreds
             time_string = time_str_list[0] + "佰"
             return time_string
-        elif int_datetime % 10 == 0 and int_datetime % 1 != 0: # x0x
+        elif int_datetime % 100 < 10: # x0x
             time_string = time_str_list[0] + "佰零" + time_str_list[-1]
             return time_string
         elif int_datetime % 10 == 0: # xx0
@@ -104,23 +99,15 @@ def convertMinSecMicro(int_datetime):
         else:
             time_string = time_str_list[0] + "佰" + time_str_list[1] + "拾" + time_str_list[2]
             return time_string
-    
-
-year = convertYear(4504)
-month = convertMonDayHr(50)
-
-# year = convertYear(date_time_now.year)
-# month = convertMonDayHr(date_time_now.month)
-# day = convertMonDayHr(date_time_now.day)
-# hr = convertMonDayHr(date_time_now.hour)
-# mins = convertMinSecMicro(date_time_now.minute)
-# sec = convertMinSecMicro(date_time_now.second)
-# ms = convertMinSecMicro(date_time_now.microsecond) # this is converted from microsends to milliseconds
 
 
-print(year+"年"+month+"月") # +day+"日"+hr+"時"+mins+"分"+sec+"秒"+ms+"毫秒")
-# print(convertMDHMS(date_time_now.microsecond))
+year = convertYear(date_time_now.year)
+month = convertMonDayHr(date_time_now.month)
+day = convertMonDayHr(date_time_now.day)
+hr = convertMonDayHr(date_time_now.hour)
+mins = convertMinSecMicro(date_time_now.minute)
+sec = convertMinSecMicro(date_time_now.second)
+ms = convertMinSecMicro(date_time_now.microsecond//1000) # this is converted from microsends to milliseconds
 
-
-# xxxx 年 x/xx 月 x/xx 日 上午/下午 xx 時 xx 分 xx 秒 xxx 毫秒
-# edge case testing: 0, 1, 10, 14, 100, 101, 110, 
+print(date_time_now)
+print(year+"年"+month+"月"+day+"日"+hr+"時"+mins+"分"+sec+"秒"+ms+"毫秒")
