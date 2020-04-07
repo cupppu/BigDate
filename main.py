@@ -1,7 +1,5 @@
 import datetime
 
-date_time_now = datetime.datetime.today() # get date and time for "now"
-
 
 def numberToStringList(number):
     """ Converts an int into a list containing the Chinese character of the digits """
@@ -91,7 +89,8 @@ def convertMinSecMicro(int_datetime):
             time_string = time_str_list[0] + "佰" + time_str_list[1] + "拾" + time_str_list[2]
             return time_string
 
-    
+
+date_time_now = datetime.datetime.today() # get date and time for "now"
 
 year = convertYear(date_time_now.year)
 month = convertMonDayHr(date_time_now.month)
