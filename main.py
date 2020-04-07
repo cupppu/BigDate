@@ -3,15 +3,11 @@ import datetime
 date_time_now = datetime.datetime.today() # get date and time for "now"
 # 零壹貳叁肆伍陸柒捌玖 拾佰
 
-def numberToIntList(number):
-    """ Converts an int into a list containing the integer digits """
-    
+
+def numberToStringList(number):
+    """ Converts an int into a list containing the Chinese character of the digits """
+
     int_list = [int(i) for i in str(number)]
-    return int_list
-
-
-def IntListToStringList(int_list):
-    """ Converts a list with ints into a list containing the Chinese character of the digits """
 
     switcher = {
         0: "零",
@@ -33,8 +29,7 @@ def IntListToStringList(int_list):
 def convertYear(int_year):
     """ Changing year from number to Chinese e.g. 2020 to 貳零貳零 """
 
-    year_int_list = numberToIntList(int_year)
-    year_str_list = IntListToStringList(year_int_list)
+    year_str_list = numberToStringList(int_year)
     year_string = ''.join(year_str_list).strip()
     return year_string
     
@@ -42,8 +37,7 @@ def convertYear(int_year):
 def convertMonDayHr(int_datetime):
     """ Changing all numbers of month/day/hour into Chinese e.g. 999 to 玖佰玖拾玖 """
     
-    datetime_int_list = numberToIntList(int_datetime)
-    mondayhr_str_list = IntListToStringList(datetime_int_list)
+    mondayhr_str_list = numberToStringList(int_datetime)
     
     # 0-9, 10, 11-19, 20-99
     if int_datetime < 10:
@@ -64,10 +58,9 @@ def convertMonDayHr(int_datetime):
 
 
 def convertMinSecMicro(int_datetime):
-    """ Changing all numbers of minute/second/ms into Chinese e.g. 999 to 玖佰玖拾玖 """
+    """ Changing all numbers of minute/second/ms into Chinese e.g. 909 to 玖佰零玖 """
     
-    time_int_list = numberToIntList(int_datetime)
-    time_str_list = IntListToStringList(time_int_list)
+    time_str_list = numberToStringList(int_datetime)
 
     # 1 digit: 0-9
     # 2 digit: 10, 11-19, 20-99, %10 = 0
@@ -105,7 +98,7 @@ def convertMinSecMicro(int_datetime):
 
 # year = convertYear(4504)
 # month = convertMonDayHr(50)
-ms = convertMinSecMicro(104)
+ms = convertMinSecMicro(909)
 
 # year = convertYear(date_time_now.year)
 # month = convertMonDayHr(date_time_now.month)
@@ -116,7 +109,7 @@ ms = convertMinSecMicro(104)
 # ms = convertMinSecMicro(date_time_now.microsecond//1000) # this is converted from microsends to milliseconds
 
 
-print(date_time_now)
+# print(date_time_now)
 # print(year+"年"+month+"月"+day+"日"+hr+"時"+mins+"分"+sec+"秒"+ms+"毫秒")
 
 print(ms)
