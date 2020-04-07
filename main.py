@@ -115,7 +115,7 @@ month = convertMonDayHr(50)
 # hr = convertMonDayHr(date_time_now.hour)
 # mins = convertMinSecMicro(date_time_now.minute)
 # sec = convertMinSecMicro(date_time_now.second)
-# ms = convertMinSecMicro(date_time_now.microsecond) # this is converted from microsends to milliseconds
+ms = convertMinSecMicro(date_time_now.microsecond//1000) # this is converted from microsends to milliseconds
 
 
 print(year+"年"+month+"月") # +day+"日"+hr+"時"+mins+"分"+sec+"秒"+ms+"毫秒")
