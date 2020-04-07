@@ -88,7 +88,7 @@ def convertMinSecMicro(int_datetime):
         if int_datetime % 100 == 0: #hundreds
             time_string = time_str_list[0] + "佰"
             return time_string
-        elif int_datetime % 10 == 0 and int_datetime % 1 != 0: # x0x
+        elif int_datetime % 100 < 10: # x0x
             time_string = time_str_list[0] + "佰零" + time_str_list[-1]
             return time_string
         elif int_datetime % 10 == 0: # xx0
