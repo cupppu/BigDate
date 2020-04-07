@@ -1,7 +1,6 @@
 import datetime
 
 date_time_now = datetime.datetime.today() # get date and time for "now"
-# 零壹貳叁肆伍陸柒捌玖 拾佰
 
 def numberToIntList(number):
     """ Converts an int into a list containing the integer digits """
@@ -45,7 +44,6 @@ def convertMonDayHr(int_datetime):
     datetime_int_list = numberToIntList(int_datetime)
     mondayhr_str_list = IntListToStringList(datetime_int_list)
     
-    # 0-9, 10, 11-19, 20-99
     if int_datetime < 10:
         return mondayhr_str_list[0]
     elif int_datetime == 10:
@@ -69,9 +67,7 @@ def convertMinSecMicro(int_datetime):
     time_int_list = numberToIntList(int_datetime)
     time_str_list = IntListToStringList(time_int_list)
 
-    # 1 digit: 0-9
-    # 2 digit: 10, 11-19, 20-99, %10 = 0
-    # 3 digit: %100 = 0, %10 = 0 and %1 != 0, %10 = 0, rest
+
     if int_datetime < 10:                           # 1 digit
         time_string = "零" + time_str_list[0]
         return time_string
@@ -103,9 +99,6 @@ def convertMinSecMicro(int_datetime):
             return time_string
     
 
-# year = convertYear(4504)
-# month = convertMonDayHr(50)
-
 year = convertYear(date_time_now.year)
 month = convertMonDayHr(date_time_now.month)
 day = convertMonDayHr(date_time_now.day)
@@ -117,7 +110,3 @@ ms = convertMinSecMicro(date_time_now.microsecond//1000) # this is converted fro
 
 print(date_time_now)
 print(year+"年"+month+"月"+day+"日"+hr+"時"+mins+"分"+sec+"秒"+ms+"毫秒")
-# print(convertMDHMS(date_time_now.microsecond))
-
-
-# edge case testing: 0, 1, 10, 14, 100, 101, 110, 
