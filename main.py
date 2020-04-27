@@ -4,6 +4,7 @@ import argparse
 parser = argparse.ArgumentParser(description="Options for different modes")
 parser.add_argument("-m", "--ms", help="show seconds and milliseconds", action="store_true")
 parser.add_argument("-r", "--hr", help="show the time in 12-hour format instead of 24-hour", action="store_true")
+parser.add_argument("-c", "--cow", help="show 上牛 and 下牛 instead of 上午 and 下午", action="store_true")
 args = parser.parse_args()
 
 
@@ -87,6 +88,13 @@ def convertMinSecMicro(int_datetime):
 
 date_time_now = datetime.datetime.today() # get date and time for "now"
 
+if args.cow:
+    am = "上牛"
+    pm = "下牛"
+else:
+    am = "上午"
+    pm = "下午"
+
 year = convertYear(date_time_now.year)
 month = convertMonDayHr(date_time_now.month)
 day = convertMonDayHr(date_time_now.day)
@@ -94,13 +102,13 @@ if not args.hr:
     hr = convertMonDayHr(date_time_now.hour)
 elif date_time_now.hour < 12:
     hr = convertMonDayHr(date_time_now.hour)
-    hr = "上午" + hr
+    hr = am + hr
 elif date_time_now.hour > 12:
     hr = convertMonDayHr(date_time_now.hour - 12)
-    hr = "下午" + hr
+    hr = pm + hr
 else:
     hr = convertMonDayHr(date_time_now.hour)
-    hr = "下午" + hr
+    hr = pm + hr
 mins = convertMinSecMicro(date_time_now.minute)
 sec = convertMinSecMicro(date_time_now.second)
 ms = convertMinSecMicro(date_time_now.microsecond//1000) # this is converted from microsends to milliseconds
