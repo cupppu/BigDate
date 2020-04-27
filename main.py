@@ -4,6 +4,7 @@ import argparse
 parser = argparse.ArgumentParser(description="Options for different modes")
 parser.add_argument("-m", "--ms", help="show seconds and milliseconds", action="store_true")
 parser.add_argument("-r", "--hr", help="show the time in 12-hour format instead of 24-hour", action="store_true")
+parser.add_argument("-n", "--manual", help="use user-specified date and time as input", action="store_true")
 args = parser.parse_args()
 
 
@@ -86,6 +87,11 @@ def convertMinSecMicro(int_datetime):
 
 
 date_time_now = datetime.datetime.today() # get date and time for "now"
+if args.manual:
+    date_time_now = datetime.datetime(1,1,1,0,0,0,0)
+    date_input = input("Enter date and time in YYYY-MM-DD-HH-MM-SS format: ")
+    inputYear, inputMonth, inputDay, inputHour, inputMinute, inputSecond = map(int, date_input.split("-"))
+    date_time_now = datetime.datetime(inputYear,inputMonth,inputDay,inputHour,inputMinute,inputSecond)
 
 year = convertYear(date_time_now.year)
 month = convertMonDayHr(date_time_now.month)
